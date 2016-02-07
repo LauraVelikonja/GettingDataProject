@@ -262,64 +262,6 @@ names(TidyData)
 ```
 
 ```r
-head(TidyData, 5)
-```
-
-```
-   subject activity      unit    move          gear jerk magnitude   type axis count        value
- 1:       1   LAYING      Time    Body Accelerometer Jerk        NA   Mean    X    50  0.081086534
- 2:       1   LAYING      Time    Body Accelerometer Jerk        NA   Mean    Y    50  0.003838204
- 3:       1   LAYING      Time    Body Accelerometer Jerk        NA   Mean    Z    50  0.010834236
- 4:       1   LAYING      Time    Body Accelerometer Jerk        NA   Mean   NA    50 -0.954396265
- 5:       1   LAYING      Time    Body Accelerometer Jerk        NA Stddev    X    50 -0.958482112
- 6:       1   LAYING      Time    Body Accelerometer Jerk        NA Stddev    Y    50 -0.924149274
- 7:       1   LAYING      Time    Body Accelerometer Jerk        NA Stddev    Z    50 -0.954855111
- 8:       1   LAYING      Time    Body Accelerometer Jerk        NA Stddev   NA    50 -0.928245628
- 9:       1   LAYING      Time    Body Accelerometer   NA        NA   Mean    X    50  0.221598244
-10:       1   LAYING      Time    Body Accelerometer   NA        NA   Mean    Y    50 -0.040513953
-11:       1   LAYING      Time    Body Accelerometer   NA        NA   Mean    Z    50 -0.113203554
-12:       1   LAYING      Time    Body Accelerometer   NA        NA   Mean   NA    50 -0.841929152
-13:       1   LAYING      Time    Body Accelerometer   NA        NA Stddev    X    50 -0.928056469
-14:       1   LAYING      Time    Body Accelerometer   NA        NA Stddev    Y    50 -0.836827406
-15:       1   LAYING      Time    Body Accelerometer   NA        NA Stddev    Z    50 -0.826061402
-16:       1   LAYING      Time    Body Accelerometer   NA        NA Stddev   NA    50 -0.795144864
-17:       1   LAYING      Time Gravity Accelerometer   NA        NA   Mean    X    50 -0.248881798
-18:       1   LAYING      Time Gravity Accelerometer   NA        NA   Mean    Y    50  0.705549773
-19:       1   LAYING      Time Gravity Accelerometer   NA        NA   Mean    Z    50  0.445817720
-20:       1   LAYING      Time Gravity Accelerometer   NA        NA   Mean   NA    50 -0.841929152
-21:       1   LAYING      Time Gravity Accelerometer   NA        NA Stddev    X    50 -0.896830018
-22:       1   LAYING      Time Gravity Accelerometer   NA        NA Stddev    Y    50 -0.907720007
-23:       1   LAYING      Time Gravity Accelerometer   NA        NA Stddev    Z    50 -0.852366290
-24:       1   LAYING      Time Gravity Accelerometer   NA        NA Stddev   NA    50 -0.795144864
-25:       1   LAYING      Time      NA     Gyroscope Jerk        NA   Mean    X    50 -0.107270949
-26:       1   LAYING      Time      NA     Gyroscope Jerk        NA   Mean    Y    50 -0.041517287
-27:       1   LAYING      Time      NA     Gyroscope Jerk        NA   Mean    Z    50 -0.074050121
-28:       1   LAYING      Time      NA     Gyroscope Jerk        NA   Mean   NA    50 -0.963461030
-29:       1   LAYING      Time      NA     Gyroscope Jerk        NA Stddev    X    50 -0.918608521
-30:       1   LAYING      Time      NA     Gyroscope Jerk        NA Stddev    Y    50 -0.967907244
-31:       1   LAYING      Time      NA     Gyroscope Jerk        NA Stddev    Z    50 -0.957790160
-32:       1   LAYING      Time      NA     Gyroscope Jerk        NA Stddev   NA    50 -0.935840983
-33:       1   LAYING      Time      NA     Gyroscope   NA        NA   Mean    X    50 -0.016553094
-34:       1   LAYING      Time      NA     Gyroscope   NA        NA   Mean    Y    50 -0.064486124
-35:       1   LAYING      Time      NA     Gyroscope   NA        NA   Mean    Z    50  0.148689436
-36:       1   LAYING      Time      NA     Gyroscope   NA        NA   Mean   NA    50 -0.874759548
-37:       1   LAYING      Time      NA     Gyroscope   NA        NA Stddev    X    50 -0.873543868
-38:       1   LAYING      Time      NA     Gyroscope   NA        NA Stddev    Y    50 -0.951090440
-39:       1   LAYING      Time      NA     Gyroscope   NA        NA Stddev    Z    50 -0.908284663
-40:       1   LAYING      Time      NA     Gyroscope   NA        NA Stddev   NA    50 -0.819010170
-41:       1   LAYING Frequency    Body Accelerometer Jerk        NA   Mean    X    50 -0.957073884
-42:       1   LAYING Frequency    Body Accelerometer Jerk        NA   Mean    Y    50 -0.922462610
-43:       1   LAYING Frequency    Body Accelerometer Jerk        NA   Mean    Z    50 -0.948060904
-44:       1   LAYING Frequency    Body Accelerometer Jerk        NA   Mean   NA    50 -0.933300361
-45:       1   LAYING Frequency    Body Accelerometer Jerk        NA Stddev    X    50 -0.964160709
-46:       1   LAYING Frequency    Body Accelerometer Jerk        NA Stddev    Y    50 -0.932217870
-47:       1   LAYING Frequency    Body Accelerometer Jerk        NA Stddev    Z    50 -0.960586987
-48:       1   LAYING Frequency    Body Accelerometer Jerk        NA Stddev   NA    50 -0.921803976
-49:       1   LAYING Frequency    Body Accelerometer   NA        NA   Mean    X    50 -0.939099052
-50:       1   LAYING Frequency    Body Accelerometer   NA        NA   Mean    Y    50 -0.867065205
-    subject activity      unit    move          gear jerk magnitude   type axis count        value
-```
-```r
 str(TidyData)
 ```
 
