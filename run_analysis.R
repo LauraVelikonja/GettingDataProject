@@ -1,6 +1,7 @@
 #Use data.frame
-require("data.table")
-
+require(data.table)
+require(dplyr)
+library(plyr)
 
 #Download and unzip data
 getwd()
@@ -43,52 +44,37 @@ features <- features[grepl("mean\\(\\)|std\\(\\)", featureName)]
 features$feature <- features[, paste0("V", featureNum)]
 select <- c(key(tbl), features$feature)
 tbl <- tbl[, select, with = FALSE]
-
-head(features)
-
+head(dtFeatures)
 features$feature
 
 #Normalize the table
 tbl <- merge(tbl, activities, by = "activity", all.x = TRUE)
 setkey(tbl, subject, activity, activityName)
-tbl <- data.table(melt(tbl, key(tbl), variable.name = "feature"))
-tbl <- merge(tbl, features, by = "feature",            all.x = TRUE)
-
-#Converting activity and feature to factor 
 tbl$activity <- factor(tbl$activityName)
-tbl$feature <- factor(tbl$featureName)
 
-#Prepare factor columns
-n <- length(tbl$feature)
-tbl$axis <- factor(n, c("X","Y","Z")) #X/Y/Z/NA
-tbl$move <- factor(n, c("Body", "Gravity")) #body/gravity
-tbl$gear <- factor(n, c("Accelerometer","Gyroscope")) #gyro/accelerometer
-tbl$unit <- factor(n, c("Time","Frequency")) #time/freq
-tbl$type <- factor(n, c("Mean","Stddev")) #mean/stddev
-tbl$jerk <- factor(n, c("Jerk")) #jerk
-tbl$magnitude <- factor(n, c("MAgnitude")) #magnitude
+#renaming features
+features$featureName<- gsub("mean\\(\\)","Mean",features$featureName)
+features$featureName<- gsub("^t","Time.",features$featureName)
+features$featureName<- gsub("^f","Frequency.",features$featureName)
+features$featureName<- gsub("std\\(\\)","Stddev",features$featureName)
+features$featureName<- gsub("-X$",".X",features$featureName)
+features$featureName<- gsub("-Y$",".Y",features$featureName)
+features$featureName<- gsub("-Z$",".Z",features$featureName)
+features$featureName<- gsub("Gyro","Gyroscope.",features$featureName)
+features$featureName<- gsub("Body","Body.",features$featureName)
+features$featureName<- gsub("Gravity","Gyroscope.",features$featureName)
+features$featureName<- gsub("Mag","Magnitude.",features$featureName)
+features$featureName<- gsub("Acc","Acceleration.",features$featureName)
+features$featureName<- gsub("-","",features$featureName)
 
-#filling factor columns
-tbl[grepl("X$", tbl$feature)==TRUE]$axis<-"X"
-tbl[grepl("Y$", tbl$feature)==TRUE]$axis<-"Y"
-tbl[grepl("Z$", tbl$feature)==TRUE]$axis<-"Z"
-tbl[grepl("BodyAcc", tbl$feature)==TRUE]$move<-"Body"
-tbl[grepl("GravityAcc", tbl$feature)==TRUE]$move<-"Gravity"
-tbl[grepl("Acc", tbl$feature)==TRUE]$gear<-"Accelerometer"
-tbl[grepl("Gyro", tbl$feature)==TRUE]$gear<-"Gyroscope"
-tbl[grepl("^t", tbl$feature)==TRUE]$unit<-"Time"
-tbl[grepl("^f", tbl$feature)==TRUE]$unit<-"Frequency"
-tbl[grepl("mean()", tbl$feature)==TRUE]$type<-"Mean"
-tbl[grepl("std()", tbl$feature)==TRUE]$type<-"Stddev"
-tbl[grepl("Jerk", tbl$feature)==TRUE]$jerk<-"Jerk"
-tbl[grepl("Magnitude", tbl$feature)==TRUE]$magnitude<-"Magnitude"
+for (i in (1:length(features$featureName))) {
+    setnames(tbl, features$feature, features$featureName)
+}
 
-#converting multi-row to tidy table 
-setkey(tbl, subject, activity, unit, move, gear, jerk, magnitude, type, axis)
-TidyData <- tbl[, list(count = .N, value = mean(value)), by = key(tbl)]
-
-#saving TidyData
+#Summarizing
+TidyData <- ddply(tbl, c("subject","activity"), numcolwise(mean))
 write.table(TidyData, "./Project/GettingDataProjectTidyData.txt", row.name=FALSE)
-key(TidyData)
-head(TidyData, 50)
 
+#Little info
+names(TidyData)
+str(TidyData)
